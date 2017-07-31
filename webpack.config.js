@@ -23,7 +23,8 @@ var DEV_SERVER_CONFIG = {
   openPage: ""
 };
 
-var POSTCSS = {
+var POSTCSS = PRODUCTION 
+? {
   test: /\.css$/,
   use: ExtractTextPlugin.extract({
     use: [
@@ -34,6 +35,19 @@ var POSTCSS = {
       "postcss-loader"
     ]
   })
+}
+: {
+    test: /\.css$/,
+        use: [
+          'style-loader',
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          'postcss-loader'
+        ]
+};
+
+var TYPESCRIPT = {
+  test: /\.ts$/,
+  loader: "awesome-typescript-loader"
 };
 
 var PROJECT_PLUGINS = PRODUCTION
@@ -46,13 +60,16 @@ var PROJECT_PLUGINS = PRODUCTION
     ];
 
 module.exports = {
-  entry: "./src/site/js/index.js",
+  entry: "./src/site/js/index.ts",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js"
   },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js", ".jsx"]
+  },
   module: {
-    loaders: [POSTCSS]
+    loaders: [POSTCSS, TYPESCRIPT]
   },
   devServer: DEV_SERVER_CONFIG,
   plugins: PROJECT_PLUGINS
