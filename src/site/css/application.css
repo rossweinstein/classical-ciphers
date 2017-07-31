@@ -3,3 +3,7 @@
 #app {
     color: var(--color-blue);
 }
+
+body {
+    background-color: lightblue;
+}

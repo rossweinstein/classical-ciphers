@@ -23,27 +23,27 @@ var DEV_SERVER_CONFIG = {
   openPage: ""
 };
 
-var POSTCSS = PRODUCTION 
-? {
-  test: /\.css$/,
-  use: ExtractTextPlugin.extract({
-    use: [
-      {
-        loader: "css-loader",
-        options: { importLoaders: 1 }
-      },
-      "postcss-loader"
-    ]
-  })
-}
-: {
-    test: /\.css$/,
+var POSTCSS = PRODUCTION
+  ? {
+      test: /\.css$/,
+      use: ExtractTextPlugin.extract({
         use: [
-          'style-loader',
-          { loader: 'css-loader', options: { importLoaders: 1 } },
-          'postcss-loader'
+          {
+            loader: "css-loader",
+            options: { importLoaders: 1 }
+          },
+          "postcss-loader"
         ]
-};
+      })
+    }
+  : {
+      test: /\.css$/,
+      use: [
+        "style-loader",
+        { loader: "css-loader", options: { importLoaders: 1 } },
+        "postcss-loader"
+      ]
+    };
 
 var TYPESCRIPT = {
   test: /\.ts$/,
