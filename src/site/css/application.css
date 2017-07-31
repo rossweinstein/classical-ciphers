@@ -1,0 +1,5 @@
+@import "utilities/colors.css";
+
+#app {
+    color: var(--color-blue);
+}
