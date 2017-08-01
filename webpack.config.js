@@ -7,7 +7,7 @@ var DEVELOPMENT = process.env.NODE_ENV === "development";
 var PRODUCTION = process.env.NODE_ENV === "production";
 
 var GENERATE_HTML = new HtmlWebpackPlugin({
-  title: "Custom Template",
+  title: "Classical Ciphers",
   minify: {
     collapseWhitespace: true
   },

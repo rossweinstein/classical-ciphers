@@ -2,29 +2,28 @@
 
 var styles = require('../css/application.css');
 
-import { CaesarCipherDecoder } from './Ciphers/Caesar/CaesarCipherDecoder';
-import { CaesarCipherEncoder } from './Ciphers/Caesar/CaesarCipherEncoder';
-import { ICipher } from './Ciphers/ICipher';
 
+const cipherType = <HTMLInputElement>document.getElementById('selectCipher');
+const keyPlaceholder = <HTMLInputElement>document.getElementById('key');
 
-console.log("hi");
+cipherType.addEventListener('change', () => {
+    const selection: string = cipherType.value;
 
-var theApp = document.getElementById("app");
-theApp.innerHTML = "It Works";
+    if (selection == 'Caesar') {
+        keyPlaceholder.value = '';
+        keyPlaceholder.placeholder = "Enter A Number";
+        keyPlaceholder.maxLength = 3;
+       
+    } else {
+    
+        keyPlaceholder.value = '';
+        keyPlaceholder.placeholder = "Enter Keyword";
+        keyPlaceholder.maxLength = 10;
+           
+        
+    }
+});
 
-const myName = "Ross Weinstein";
-
-console.log(myName);
-
-const caesarEncoder: ICipher = new CaesarCipherEncoder();
-const encodedName: string = caesarEncoder.performCipher(myName, "150");
-
-console.log(encodedName);
-
-const caesarDecoder: ICipher = new CaesarCipherDecoder();
-const decodedName: string = caesarDecoder.performCipher(encodedName, "150");
-
-console.log(decodedName);
 
 if (module.hot) {
     module.hot.accept();
