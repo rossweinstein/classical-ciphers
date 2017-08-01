@@ -55,12 +55,11 @@ var PROJECT_PLUGINS = PRODUCTION
   : [
       new webpackDev.HotModuleReplacementPlugin(),
       new webpackDev.NamedModulesPlugin(),
-      GENERATE_HTML,
-      new ExtractTextPlugin("bundle.css")
+      GENERATE_HTML
     ];
 
 module.exports = {
-  entry: "./src/site/js/index.ts",
+  entry: "./src/site/ts/index.ts",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js"
