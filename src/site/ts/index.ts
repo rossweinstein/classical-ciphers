@@ -1,12 +1,13 @@
 import { cipherForm } from './formValidation/controller/cipherFormController';
-import { styles } from '../css/application.css';
+require('../css/application.css');
 
-const formKeyInput = document.
+const keyInputElement: HTMLInputElement = <HTMLInputElement>document.getElementById('key');
+const cipherType: HTMLInputElement = <HTMLInputElement>document.getElementById('selectCipher');
+const submitButton: HTMLButtonElement = <HTMLButtonElement>document.getElementById('button');
 
 const cipherFormController = new cipherForm();
-cipherFormController.validateForm();
-cipherFormController.ensureCorrectPlaceholder();
-
+cipherFormController.validateForm(cipherType, keyInputElement, submitButton);
+cipherFormController.ensureCorrectPlaceholder(cipherType, keyInputElement);
 
 
 if (module.hot) {

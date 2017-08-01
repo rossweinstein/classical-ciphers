@@ -3,8 +3,8 @@ export function canFormBeSubmitted(
   key: string
 ): boolean {
   return selectedOption == "Caesar"
-    ? this.isValidNumberKey(key)
-    : this.isValidKeyword(key);
+    ? isValidNumberKey(key)
+    : isValidKeyword(key);
 }
 
 function isValidNumberKey(key: string): boolean {
