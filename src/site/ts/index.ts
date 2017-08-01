@@ -10,6 +10,7 @@ cipherFormController.validateForm(cipherType, keyInputElement, submitButton);
 cipherFormController.ensureCorrectPlaceholder(cipherType, keyInputElement);
 
 
+
 if (module.hot) {
     module.hot.accept();
 }
