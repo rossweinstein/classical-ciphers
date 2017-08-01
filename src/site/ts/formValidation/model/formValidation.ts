@@ -1,31 +1,47 @@
-export function disableButton(selectedOption: string, key: string): boolean {
-  return selectedOption == "Caesar" ? isInvalidNumberKey(key) : isInvalidKeyword(key);
-}
+export class formValidation {
+  /*
+    Determines if we have valid input, disabiling the submit button if there is something wrong.
+    To have a valid input the key must be numeric for the Caesar cipher and only [A-Za-z] for
+    transposition and Vigenere ciphers
+  */
+  public disableButton(selectedOption: string, key: string): boolean {
+    return selectedOption == "Caesar"
+      ? this.isInvalidNumberKey(key)
+      : this.isInvalidKeyword(key);
+  }
 
-function isInvalidNumberKey(key: string): boolean {
-  return isNaN(Number(key));
-}
+  //////////////// VALIDATING NUMERIC KEYS ///////////////////////////
+  private isInvalidNumberKey(key: string): boolean {
+    return isNaN(Number(key));
+  }
 
-function isInvalidKeyword(key: string): boolean {
-  return converStringToNumberArray(key).filter((ascii) => {
-    return isValidLetter(ascii);
-  }).length != key.length;
-}
+  //////////////// VALIDATING KEYWORDS ///////////////////////////////
 
-function converStringToNumberArray(word: string): number[] {
-  return word.split('').map((letter) => {
+  private isInvalidKeyword(key: string): boolean {
+    return (
+      this.converStringToNumberArray(key).filter(ascii => {
+        return this.isValidLetter(ascii);
+      }).length != key.length
+    );
+  }
+
+  private converStringToNumberArray(word: string): number[] {
+    return word.split("").map(letter => {
       return letter.charCodeAt(0);
-  })
-}
+    });
+  }
 
-function isValidLetter(ascii: number): boolean {
-  return isValidUpperCaseLetter(ascii) || isValidLowerCaseLetter(ascii);
-}
+  private isValidLetter(ascii: number): boolean {
+    return (
+      this.isValidUpperCaseLetter(ascii) || this.isValidLowerCaseLetter(ascii)
+    );
+  }
 
-function isValidUpperCaseLetter(ascii: number): boolean {
-  return ascii >= 65 && ascii <= 90;
-}
+  private isValidUpperCaseLetter(ascii: number): boolean {
+    return ascii >= 65 && ascii <= 90;
+  }
 
-function isValidLowerCaseLetter(ascii: number): boolean {
-  return ascii >= 97 && ascii <= 122;
+  private isValidLowerCaseLetter(ascii: number): boolean {
+    return ascii >= 97 && ascii <= 122;
+  }
 }
