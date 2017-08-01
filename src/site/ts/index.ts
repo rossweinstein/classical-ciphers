@@ -1,28 +1,12 @@
-///<reference types="webpack-env" />
+import { cipherForm } from './formValidation/controller/cipherFormController';
+import { styles } from '../css/application.css';
 
-var styles = require('../css/application.css');
+const formKeyInput = document.
 
+const cipherFormController = new cipherForm();
+cipherFormController.validateForm();
+cipherFormController.ensureCorrectPlaceholder();
 
-const cipherType = <HTMLInputElement>document.getElementById('selectCipher');
-const keyPlaceholder = <HTMLInputElement>document.getElementById('key');
-
-cipherType.addEventListener('change', () => {
-    const selection: string = cipherType.value;
-
-    if (selection == 'Caesar') {
-        keyPlaceholder.value = '';
-        keyPlaceholder.placeholder = "Enter A Number";
-        keyPlaceholder.maxLength = 3;
-       
-    } else {
-    
-        keyPlaceholder.value = '';
-        keyPlaceholder.placeholder = "Enter Keyword";
-        keyPlaceholder.maxLength = 10;
-           
-        
-    }
-});
 
 
 if (module.hot) {
