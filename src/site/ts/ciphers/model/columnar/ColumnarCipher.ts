@@ -4,7 +4,6 @@ export abstract class ColumnarCipher {
     var stringAray = [];
     for (let i = 0; i < text.length; i++) {
       var currentLetters = stringAray[i % keyLength];
-
       if (currentLetters == null) {
         stringAray[i % keyLength] = text.charAt(i).toLowerCase();
       } else {

@@ -1,4 +1,4 @@
-import { ColumnarCipherEncoder } from './ciphers/model/columnar/ColumnarCipherEncoder';
+import { ColumnarCipherDecoder } from './ciphers/model/columnar/ColumnarCipherDecoder';
 import { CipherController } from "./ciphers/controllers/CipherController";
 import { cipherForm } from "./formValidation/controller/cipherFormController";
 require("../css/application.css");
@@ -36,9 +36,9 @@ submitButton.addEventListener("click", () => {
   }
 });
 
-const transCipher = new ColumnarCipherEncoder();
-const encryptedText = transCipher.performCipher("This message here", "Newt");
-console.log(encryptedText);
+const transCipher = new ColumnarCipherDecoder();
+const decrypted = transCipher.performCipher("hmaht s esseriege", "newt");
+console.log(decrypted);
 
 if (module.hot) {
   module.hot.accept();

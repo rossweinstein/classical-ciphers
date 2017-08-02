@@ -1,3 +1,4 @@
+import { ColumnarCipherDecoder } from './../model/columnar/ColumnarCipherDecoder';
 import { ColumnarCipherEncoder } from './../model/columnar/ColumnarCipherEncoder';
 import { CaesarCipherEncoder } from './../model/caesar/CaesarCipherEncoder';
 import { CaesarCipherDecoder } from './../model/caesar/CaesarCipherDecoder';
@@ -62,7 +63,7 @@ class CipherFactory {
     }
 
     private static createColumnarCipher(method: CipherMethod): ICipher {
-      return method == CipherMethod.Encrypt ? new ColumnarCipherEncoder : new CaesarCipherDecoder;
+      return method == CipherMethod.Encrypt ? new ColumnarCipherEncoder : new ColumnarCipherDecoder;
     }
 
     private static createVigenereCipher(method: CipherMethod): ICipher {
