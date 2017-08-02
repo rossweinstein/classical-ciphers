@@ -16,10 +16,22 @@ cipherFormController.validateForm(cipherType, keyInputElement, submitButton);
 cipherFormController.ensureCorrectPlaceholder(cipherType, keyInputElement);
 
 const cipher = new CipherController();
+
 submitButton.addEventListener("click", () => {
+
   if (submitButton.disabled == false) {
+
     const cipherText: string = cipherTextArea.value;
-    output.innerHTML = cipher.encrypt(cipherText, keyInputElement.value, cipherType.value);
+    const encryptionSetting = <HTMLInputElement>document.getElementById('encryptDecrypt');
+    const encrypt: boolean = encryptionSetting.value == "Encrypt";
+    
+    if (encrypt) {
+        output.innerHTML = cipher.encrypt(cipherText, keyInputElement.value, cipherType.value);
+    } else {
+        output.innerHTML = cipher.decrypt(cipherText, keyInputElement.value, cipherType.value);
+    }
+
+    
   }
 });
 

@@ -13,8 +13,7 @@ export abstract class CaesarCipher {
     }
 
     protected isValidNumericKey(key: string): boolean {
-        const possibleNumber = parseInt(key, 10);
-        return !isNaN(possibleNumber);
+        return !isNaN(Number(key));
     }
 
     protected shiftNumberArray(asciiArray: number[], key: number): number[] {
