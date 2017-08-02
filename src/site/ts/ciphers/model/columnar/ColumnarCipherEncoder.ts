@@ -7,6 +7,10 @@ export class ColumnarCipherEncoder extends ColumnarCipher implements ICipher {
   }
 
   public performCipher(text: string, key: string): string {
+    return this.keyValidator.isValidKeyword(key) ? this.encodeText(text, key) : "Invalid Key: Must Be Alphabetic";
+  }
+
+  private encodeText(text: string, key: string): string {
     const dividedLetters = this.separateCharacters(text, key.length);
     const cipherColumnOrder = this.columnOrder(key);
     return this.formCipher(dividedLetters, cipherColumnOrder);

@@ -1,61 +1,65 @@
-import { ICipher } from './../ICipher';
-import { ColumnarCipher } from './../columnar/ColumnarCipher';
+import { ICipher } from "./../ICipher";
+import { ColumnarCipher } from "./../columnar/ColumnarCipher";
 
-export class ColumnarCipherDecoder extends ColumnarCipher implements ICipher { 
+export class ColumnarCipherDecoder extends ColumnarCipher implements ICipher {
+  public constructor() {
+    super();
+  }
 
-    public constructor() {
-        super();
+  public performCipher(text: string, key: string): string {
+    return this.keyValidator.isValidKeyword(key) ? this.decodeText(text, key) : "Invalid Key: Must Be Alphabetic";
+  }
+
+  private decodeText(text: string, key: string): string {
+    const cipherColumns: number[] = this.getColumnLengths(text, key);
+    const getColumnOrder: number[] = super.columnOrder(key);
+    const reubiltColumns: string[] = this.rebuildCipherColumns(
+      text,
+      cipherColumns,
+      getColumnOrder
+    );
+    return this.decryption(reubiltColumns, key.length);
+  }
+
+  private rebuildCipherColumns(text: string, cipherColumns: number[], order: number[]): string[] {
+    const rebuiltColumns: string[] = [];
+    var textyText = text;
+
+    for (let i = 0; i < cipherColumns.length; i++) {
+      const currentColumn = order[i];
+      const numOfLetters = cipherColumns[currentColumn];
+      rebuiltColumns[i] = textyText.substr(0, numOfLetters);
+      textyText = textyText.substr(numOfLetters);
     }
+    const orderedColumns = [];
 
-    public performCipher(text: string, key: string): string {
-        const cipherColumns: number[] = this.getColumnLengths(text, key);
-        console.log(cipherColumns);
-        const getColumnOrder: number[] = super.columnOrder(key);
-        console.log(getColumnOrder);
-        const reubiltColumns: string[] = this.rebuildCipherColumns(text, cipherColumns, getColumnOrder);
-        console.log(reubiltColumns);
-        return this.decryption(reubiltColumns, key.length);
+    for (let i = 0; i < cipherColumns.length; i++) {
+      orderedColumns.push(rebuiltColumns[order[i]]);
     }
+    return orderedColumns;
+  }
 
-    public rebuildCipherColumns(text: string, cipherColumns: number[], order: number[]): string[] {
-
-        const rebuiltColumns: string[] = [];
-        var textyText = text;
-
-        for (let i = 0; i < cipherColumns.length; i++) {
-            const currentColumn = order[i];
-            const numOfLetters = cipherColumns[currentColumn];
-            rebuiltColumns[i] = textyText.substr(0, numOfLetters);
-            textyText = textyText.substr(numOfLetters);
-        }
-        const orderedColumns = [];
-
-        for (let i = 0; i < cipherColumns.length; i++) {
-            orderedColumns.push(rebuiltColumns[order[i]]);
-        }
-        return orderedColumns;
+  private getColumnLengths(text: string, key: string): number[] {
+    const columns = super.separateCharacters(text, key.length);
+    const columnSize = [];
+    for (let i = 0; i < columns.length; i++) {
+      columnSize.push(columns[i].length);
     }
+    return columnSize;
+  }
 
-    public getColumnLengths(text: string, key: string): number[] {
-        const columns = super.separateCharacters(text, key.length);
-        const columnSize = [];
-        for (let i = 0; i < columns.length; i++) {
-            columnSize.push(columns[i].length);
-        }
-        return columnSize;
+  private decryption(rebuiltColumns: string[], keyLength: number): string {
+    var decrptedText = "";
+    const textLength = rebuiltColumns
+      .map(col => col.length)
+      .reduce((a, b) => a + b);
+    var position = 0;
+    for (let i = 0; i < textLength; i++) {
+      decrptedText += rebuiltColumns[i % keyLength].charAt(position);
+      if (i % keyLength == keyLength - 1) {
+        position++;
+      }
     }
-
-    public decryption(rebuiltColumns: string[], keyLength: number): string {
-        var decrptedText = "";
-        const textLength = rebuiltColumns.map(col => col.length).reduce((a, b) => a + b);
-        var position = 0;
-        for (let i = 0; i < textLength; i++) {
-            decrptedText += rebuiltColumns[i % keyLength].charAt(position);
-            if (i % keyLength == keyLength - 1) {
-                position++;
-            }
-        }
-        return decrptedText;
-    }
-
+    return decrptedText;
+  }
 }

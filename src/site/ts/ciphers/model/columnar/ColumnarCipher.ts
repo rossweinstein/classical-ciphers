@@ -1,5 +1,12 @@
+import { ValidateKeyword } from './../../../ValidateKeyword';
 export abstract class ColumnarCipher {
-  // take a string and break it into as many different groups as there are letters in the key
+ 
+  protected keyValidator: ValidateKeyword;
+
+  public constructor() {
+    this.keyValidator = new ValidateKeyword();
+  }
+
   protected separateCharacters(text: string, keyLength: number) {
     var stringAray = [];
     for (let i = 0; i < text.length; i++) {
