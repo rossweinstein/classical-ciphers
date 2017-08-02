@@ -13,11 +13,7 @@ export class ColumnarCipherDecoder extends ColumnarCipher implements ICipher {
   private decodeText(text: string, key: string): string {
     const cipherColumns: number[] = this.getColumnLengths(text, key);
     const getColumnOrder: number[] = super.columnOrder(key);
-    const reubiltColumns: string[] = this.rebuildCipherColumns(
-      text,
-      cipherColumns,
-      getColumnOrder
-    );
+    const reubiltColumns: string[] = this.rebuildCipherColumns(text, cipherColumns, getColumnOrder);
     return this.decryption(reubiltColumns, key.length);
   }
 
@@ -31,12 +27,17 @@ export class ColumnarCipherDecoder extends ColumnarCipher implements ICipher {
       rebuiltColumns[i] = textyText.substr(0, numOfLetters);
       textyText = textyText.substr(numOfLetters);
     }
-    const orderedColumns = [];
+    return this.orderColumnsCorrectly(rebuiltColumns, order);
+  }
 
-    for (let i = 0; i < cipherColumns.length; i++) {
+  private orderColumnsCorrectly(rebuiltColumns: string[], order: number[]): string[] {
+      const orderedColumns = [];
+
+    for (let i = 0; i < rebuiltColumns.length; i++) {
       orderedColumns.push(rebuiltColumns[order[i]]);
     }
     return orderedColumns;
+
   }
 
   private getColumnLengths(text: string, key: string): number[] {
