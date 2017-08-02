@@ -1,4 +1,4 @@
-export class modifyPlaceholderText {
+export class ModifyKeyInputElement {
 
   /*
     Ensures that the placeholder text for the key input is correct based on the type of
@@ -6,10 +6,7 @@ export class modifyPlaceholderText {
     and so the plaeholder will ask for a number.  If we are using a transposition or Vigenere
     cipher, the key must be [A-Za-z] and so the placeholder will ask for a keyword.
   */
-  public correctPlaceholder(
-    selectedOption: string,
-    textInput: HTMLInputElement
-  ) {
+  public correctPlaceholder(selectedOption: string, textInput: HTMLInputElement) {
     selectedOption == "Caesar"
       ? this.caesarPlaceholder(textInput)
       : this.keywordPlaceholder(textInput);
@@ -23,11 +20,7 @@ export class modifyPlaceholderText {
     this.placeholderReset(textInput, "Enter A Keyword", 10);
   }
 
-  private placeholderReset(
-    textInput: HTMLInputElement,
-    text: string,
-    maxSize: number
-  ) {
+  private placeholderReset(textInput: HTMLInputElement, text: string, maxSize: number) {
     textInput.value = "";
     textInput.placeholder = text;
     textInput.maxLength = maxSize;

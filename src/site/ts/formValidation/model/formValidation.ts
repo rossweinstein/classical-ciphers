@@ -1,4 +1,4 @@
-export class formValidation {
+export class FormValidation {
   /*
     Determines if we have valid input, disabiling the submit button if there is something wrong.
     To have a valid input the key must be numeric for the Caesar cipher and only [A-Za-z] for

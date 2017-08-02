@@ -1,3 +1,4 @@
+import { TranspositionCipherEncoder } from './ciphers/model/transposition/TranspositionCipherEncoder';
 import { CipherController } from "./ciphers/controllers/CipherController";
 import { cipherForm } from "./formValidation/controller/cipherFormController";
 require("../css/application.css");
@@ -34,6 +35,10 @@ submitButton.addEventListener("click", () => {
     
   }
 });
+
+const transCipher = new TranspositionCipherEncoder();
+const encryptedText = transCipher.performCipher("This message here", "Newt");
+console.log(encryptedText);
 
 if (module.hot) {
   module.hot.accept();

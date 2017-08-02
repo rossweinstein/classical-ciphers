@@ -1,14 +1,14 @@
-import { modifyPlaceholderText } from './../model/correctPlaceholder';
-import { formValidation } from './../model/formValidation';
+import { ModifyKeyInputElement } from './../model/ModifyKeyInputElement';
+import { FormValidation } from './../model/FormValidation';
 
 export class cipherForm {
 
-    private form: formValidation;
-    private modifyText: modifyPlaceholderText;
+    private form: FormValidation;
+    private modifyText: ModifyKeyInputElement;
 
     public constructor() {
-        this.form = new formValidation();
-        this.modifyText = new modifyPlaceholderText();
+        this.form = new FormValidation();
+        this.modifyText = new ModifyKeyInputElement();
     }
 
     public validateForm (formElement: HTMLInputElement, keyElement: HTMLInputElement, submitButton: HTMLButtonElement) {
