@@ -27,9 +27,9 @@ export abstract class ColumnarCipher {
   }
 
   protected columnOrder(key: string) {
-    const numberKey = this.getKeyAsNumberArray(key);
-    const unSortedKey = numberKey.slice();
-    const sortedKey = this.sortKeyInAscendingOrder(numberKey);
+    const keyAsNumberArray = this.getKeyAsNumberArray(key);
+    const unSortedKey = keyAsNumberArray.slice();
+    const sortedKey = this.sortKeyInAscendingOrder(keyAsNumberArray);
     return this.findTheOrder(unSortedKey, sortedKey);
   }
 
