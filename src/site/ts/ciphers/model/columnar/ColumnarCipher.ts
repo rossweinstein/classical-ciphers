@@ -1,4 +1,4 @@
-export abstract class TranspositionCipher {
+export abstract class ColumnarCipher {
   // take a string and break it into as many different groups as there are letters in the key
   protected separateCharacters(text: string, keyLength: number) {
     var stringAray = [];
@@ -26,11 +26,11 @@ export abstract class TranspositionCipher {
     return order;
   }
 
-  protected doSomething(key: string) {
+  protected columnOrder(key: string) {
     const numberKey = this.getKeyAsNumberArray(key);
     const unSortedKey = numberKey.slice();
-    const orderedKey = this.sortKeyInAscendingOrder(numberKey);
-    return this.findTheOrder(unSortedKey, orderedKey);
+    const sortedKey = this.sortKeyInAscendingOrder(numberKey);
+    return this.findTheOrder(unSortedKey, sortedKey);
   }
 
   private getKeyAsNumberArray(key: string): number[] {

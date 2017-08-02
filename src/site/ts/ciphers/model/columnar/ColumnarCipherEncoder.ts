@@ -1,14 +1,14 @@
 import { ICipher } from "./../ICipher";
-import { TranspositionCipher } from "./TranspositionCipher";
+import { ColumnarCipher } from "./ColumnarCipher";
 
-export class TranspositionCipherEncoder extends TranspositionCipher implements ICipher {
+export class ColumnarCipherEncoder extends ColumnarCipher implements ICipher {
   public constructor() {
     super();
   }
 
   public performCipher(text: string, key: string): string {
     const dividedLetters = this.separateCharacters(text, key.length);
-    const orderOfCipher = this.doSomething(key);
+    const orderOfCipher = this.columnOrder(key);
     return this.formCipher(dividedLetters, orderOfCipher);
   }
 

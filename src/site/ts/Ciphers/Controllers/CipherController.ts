@@ -27,8 +27,8 @@ export class CipherController {
     private getCipherType(cipher: string): CipherType {
         if (cipher == "Caesar") {
             return CipherType.Caesar;
-        } else if (cipher == 'Transposition') {
-            return CipherType.Transposition;
+        } else if (cipher == 'Columnar') {
+            return CipherType.Columnar;
         } else if (cipher == 'Vigenere') {
             return CipherType.Vigenere;
         } else {
@@ -38,7 +38,7 @@ export class CipherController {
 }
 
 enum CipherType {
-    Caesar, Transposition, Vigenere, EMPTY
+    Caesar, Columnar, Vigenere, EMPTY
 }
 
 enum CipherMethod {
@@ -49,8 +49,8 @@ class CipherFactory {
     public static createCipher(type: CipherType, method: CipherMethod): ICipher {
         if (type == CipherType.Caesar) {
             return CipherFactory.createCeasarCipher(method);
-        } else if (type == CipherType.Transposition) {
-            return CipherFactory.createTranspositionCipher(method);
+        } else if (type == CipherType.Columnar) {
+            return CipherFactory.createColumnarCipher(method);
         } else {
             return CipherFactory.createVigenereCipher(method);
         }
@@ -60,7 +60,7 @@ class CipherFactory {
         return method == CipherMethod.Encrypt ? new CaesarCipherEncoder : new CaesarCipherDecoder;
     }
 
-    private static createTranspositionCipher(method: CipherMethod): ICipher {
+    private static createColumnarCipher(method: CipherMethod): ICipher {
       return method == CipherMethod.Encrypt ? new CaesarCipherEncoder : new CaesarCipherDecoder;
     }
 
