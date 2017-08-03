@@ -8,18 +8,12 @@ export abstract class ColumnarCipher {
   }
 
   protected separateCharacters(text: string, keyLength: number) {
-    var stringAray = [];
+    var columns = [];
     for (let i = 0; i < text.length; i++) {
-      
-      var currentLetters = stringAray[i % keyLength];
-
-      if (currentLetters == null) {
-        stringAray[i % keyLength] = text.charAt(i).toLowerCase();
-      } else {
-        stringAray[i % keyLength] = currentLetters + text.charAt(i).toLowerCase();
-      }
+      var col = columns[i % keyLength];
+      columns[i % keyLength] = col == null ? text.charAt(i) : col + text.charAt(i);
     }
-    return stringAray;
+    return columns;
   }
 
   protected findTheOrder(key: number[], sortedKey: number[]) {
