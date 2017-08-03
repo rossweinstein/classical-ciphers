@@ -31,13 +31,11 @@ export class ColumnarCipherDecoder extends ColumnarCipher implements ICipher {
   }
 
   private orderColumnsCorrectly(rebuiltColumns: string[], order: number[]): string[] {
-      const orderedColumns = [];
-
+    const orderedColumns = [];
     for (let i = 0; i < rebuiltColumns.length; i++) {
       orderedColumns.push(rebuiltColumns[order[i]]);
     }
     return orderedColumns;
-
   }
 
   private getColumnLengths(text: string, key: string): number[] {
