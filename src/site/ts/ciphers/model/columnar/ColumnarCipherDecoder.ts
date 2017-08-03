@@ -51,9 +51,7 @@ export class ColumnarCipherDecoder extends ColumnarCipher implements ICipher {
 
   private decryption(rebuiltColumns: string[], keyLength: number): string {
     var decrptedText = "";
-    const textLength = rebuiltColumns
-      .map(col => col.length)
-      .reduce((a, b) => a + b);
+    const textLength = this.findTextLengthFromColumns(rebuiltColumns);
     var position = 0;
     for (let i = 0; i < textLength; i++) {
       decrptedText += rebuiltColumns[i % keyLength].charAt(position);
@@ -62,5 +60,9 @@ export class ColumnarCipherDecoder extends ColumnarCipher implements ICipher {
       }
     }
     return decrptedText;
+  }
+
+  private findTextLengthFromColumns(rebuiltColumns: string[]): number {
+    return rebuiltColumns.map(col => col.length).reduce((a, b) => a + b);
   }
 }
