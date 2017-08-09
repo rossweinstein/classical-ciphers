@@ -1,4 +1,4 @@
-import { ColumnarCipherDecoder } from './ciphers/model/columnar/ColumnarCipherDecoder';
+import { ColumnarCipherDecoder } from './ciphers/theCiphers/columnar/ColumnarCipherDecoder';
 import { CipherController } from "./ciphers/controllers/CipherController";
 import { cipherForm } from "./formValidation/controller/cipherFormController";
 require("../css/application.css");

@@ -1,8 +1,8 @@
-import { ColumnarCipherDecoder } from './../model/columnar/ColumnarCipherDecoder';
-import { ColumnarCipherEncoder } from './../model/columnar/ColumnarCipherEncoder';
-import { CaesarCipherEncoder } from './../model/caesar/CaesarCipherEncoder';
-import { CaesarCipherDecoder } from './../model/caesar/CaesarCipherDecoder';
-import { ICipher } from './../model/ICipher';
+import { ColumnarCipherDecoder } from './../theCiphers/columnar/ColumnarCipherDecoder';
+import { ColumnarCipherEncoder } from './../theCiphers/columnar/ColumnarCipherEncoder';
+import { CaesarCipherEncoder } from './../theCiphers/caesar/CaesarCipherEncoder';
+import { CaesarCipherDecoder } from './../theCiphers/caesar/CaesarCipherDecoder';
+import { ICipher } from './../theCiphers/ICipher';
 
 export class CipherController {
 
@@ -31,8 +31,6 @@ export class CipherController {
             return CipherType.Caesar;
         } else if (cipher == 'Columnar') {
             return CipherType.Columnar;
-        } else if (cipher == 'Vigenere') {
-            return CipherType.Vigenere;
         } else {
             return CipherType.EMPTY;
         }
@@ -40,7 +38,7 @@ export class CipherController {
 }
 
 enum CipherType {
-    Caesar, Columnar, Vigenere, EMPTY
+    Caesar, Columnar, EMPTY
 }
 
 enum CipherMethod {
@@ -51,11 +49,9 @@ class CipherFactory {
     public static createCipher(type: CipherType, method: CipherMethod): ICipher {
         if (type == CipherType.Caesar) {
             return CipherFactory.createCeasarCipher(method);
-        } else if (type == CipherType.Columnar) {
-            return CipherFactory.createColumnarCipher(method);
         } else {
-            return CipherFactory.createVigenereCipher(method);
-        }
+            return CipherFactory.createColumnarCipher(method);
+        } 
     }
 
     private static createCeasarCipher(method: CipherMethod): ICipher {
@@ -64,9 +60,5 @@ class CipherFactory {
 
     private static createColumnarCipher(method: CipherMethod): ICipher {
       return method == CipherMethod.Encrypt ? new ColumnarCipherEncoder : new ColumnarCipherDecoder;
-    }
-
-    private static createVigenereCipher(method: CipherMethod): ICipher {
-       return method == CipherMethod.Encrypt ? new CaesarCipherEncoder : new CaesarCipherDecoder;
     }
 }

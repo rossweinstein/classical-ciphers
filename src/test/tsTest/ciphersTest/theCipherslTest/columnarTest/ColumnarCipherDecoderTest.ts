@@ -1,4 +1,4 @@
-import { ColumnarCipherDecoder } from './../../../../../site/ts/ciphers/model/columnar/ColumnarCipherDecoder';
+import { ColumnarCipherDecoder } from './../../../../../site/ts/ciphers/theCiphers/columnar/ColumnarCipherDecoder';
 import { expect } from 'chai';
 
 describe('ColumnarCipherEncoder', () => {

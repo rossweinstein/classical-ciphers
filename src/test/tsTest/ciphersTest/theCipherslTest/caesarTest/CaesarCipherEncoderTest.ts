@@ -1,4 +1,4 @@
-import { CaesarCipherEncoder } from './../../../../../site/ts/ciphers/model/caesar/CaesarCipherEncoder';
+import { CaesarCipherEncoder } from './../../../../../site/ts/ciphers/theCiphers/caesar/CaesarCipherEncoder';
 import { expect } from 'chai';
 
 describe('CaesarCipherDecryption', () => {
